@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Duplicate Detection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .input-field {
+      margin: 20px 0;
+    }
+    .result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Duplicate Detection</h1>
+  <div class="input-field">
+    <label for="text-input">Enter your text:</label>
+    <textarea id="text-input"></textarea>
+  </div>
+  <button onclick="detectDuplicates()">Detect Duplicates</button>
+  <div id="result" class="result"></div>
+  
+  <script>
+    function detectDuplicates() {
+      var text = document.getElementById('text-input').value;
+      var words = text.split(' ');
+      var duplicates = [];
+      var counts = {};
+
+      for (var i = 0; i < words.length; i++) {
+        if (counts[words[i]] === undefined) {
+          counts[words[i]] = 1;
+        } else {
+          counts[words[i]]++;
+          if (counts[words[i]] == 2) duplicates.push(words[i]);
+        }
+      }
+
+      if (duplicates.length > 0) {
+        document.getElementById('result').innerHTML = "Duplicates: " + duplicates.join(', ');
+      } else {
+        document.getElementById('result').innerHTML = "No duplicates found.";
+      }
+    }
+  </script>
+</body>
+</html>
